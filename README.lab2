@@ -1,0 +1,99 @@
+Excercise -1:
+
+
+In the lottery scheduler, the outer loop has been run indefinite time like xv6 default scheduler.
+During each iteration of the outer loop, all required variables are reset.
+The total number of tickets of runnable processes is calculated.
+The random number generator is called for getting a new random ticket which lies within the total number of tickets.
+After that, the inner loop scans the process table to select a runnable process for giving CPU time.
+The selection is based on the random ticket returned from the pseudo-random number generator.
+If any process holds that ticket number, it is given the cpu time.
+The inner loop is not continued anymore after a process is selected.
+Because if it runs in spite of selecting a process, then the scheduler will work as round-robin for the remaining runnable processes.
+Therefore, the break statement is called. The lottery scheduler starts running from the initial state again.
+In this way, the winning probability of a new process is created with the selection of a new random ticket.
+However, the processes holding a large number of tickets are still favorite. 
+
+
+Excercise -2:
+
+Two test cases have been generated for testing lottery scheduler.
+
+
+
+								Test Case-1:
+
+In this test case, three child processes have been considered.
+To fork these child processes, the following three commands need to be run.
+         crproc &; crproc2 &; crproc3 &;
+After that, three child processes will be created with priority/tickets 20, 40, 60 respectively.
+Three processes have been assigned the task of computing prime numbers.
+The prime numbers have been printed in the console for the corresponding processes with intervals of 10000.
+The process of highest priority/tickets makes fast progress. 
+
+
+For dynamically, set the priority/tickets the following command needs to be run.
+
+           nicetester <processid> <ticketnumber>
+
+With "nicetester" the priority/tickets can be set dynamically. 
+The fast/slow rate of progress for a process can be observed with the increase/decrease of tickets respectively.
+During running the command, the console may continue printing the prime numbers.
+However, this will not create any problem for the "nicetester".
+All you have to do is please continue and complete the command with the necessary arguments. 
+
+
+
+								Test Case-2:
+
+In this test case, three child processes have been considered.
+To fork these child processes, the following three commands need to be run.
+         plnproc &; plnproc2 &; plnproc3 &;
+After that, three child processes will be created with priority/tickets 20, 40, 60 respectively.
+Three processes have been assigned the task of computing compound palindrome numbers with the number of factors for each number.
+The compound palindrome numbers have been printed in the console for the corresponding processes with the intervals of 5000.
+The process of highest priority/tickets makes fast progress. 
+
+
+For dynamically, set the priority/tickets the following command needs to be run.
+
+           nicetester <processid> <ticketnumber>
+
+With "nicetester" the priority/tickets can be set dynamically. 
+The fast/slow rate of progress for a process can be observed with the increase/decrease of tickets respectively.
+During running the command, the console may continue printing the prime numbers.
+However, this will not create any problem for the "nicetester".
+All you have to do is please continue and complete the command with the necessary arguments.
+
+    
+
+
+Discussions:
+
+Initially, my lottery scheduler was not working properly due to the wrong seeds provided to the pseudo-random number generator.
+In each iteration of the outer loop, the generator was being called with the same seeds as earlier seeds. 
+After some debugging, the problem is fixed.
+I was trying to create all child processes with a single command. However, it was not working properly.
+Then I have implemented separate commands for individual process.
+I added a new counter for total tickets in the process table. However, updating this counter properly seemed challenging.
+Therefore, I skipped this part and counted the total tickets in the runtime.
+
+
+ 			P.S.    "pst" command can be used to track the status of processes.    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
